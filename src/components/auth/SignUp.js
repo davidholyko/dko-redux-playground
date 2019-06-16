@@ -1,28 +1,29 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { signUp, signIn } from '../../api/AuthApi'
-import messages from '../../data/messages/AuthMessages'
+import { signUp, signIn } from '../../api/AuthApi';
+import messages from '../../data/messages/AuthMessages';
 
 class SignUp extends Component {
   constructor () {
-    super()
+    super();
 
     this.state = {
       email: '',
       password: '',
       passwordConfirmation: ''
-    }
+    };
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event =>
+    this.setState({
+      [event.target.name]: event.target.value
+    });
 
   onSignUp = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { alert, history, setUser } = this.props
+    const { alert, history, setUser } = this.props;
 
     signUp(this.state)
       .then(() => signIn(this.state))
@@ -30,17 +31,17 @@ class SignUp extends Component {
       .then(() => alert(messages.signUpSuccess, 'success'))
       .then(() => history.push('/'))
       .catch(error => {
-        console.error(error)
-        this.setState({ email: '', password: '', passwordConfirmation: '' })
-        alert(messages.signUpFailure, 'danger')
-      })
-  }
+        console.error(error);
+        this.setState({ email: '', password: '', passwordConfirmation: '' });
+        alert(messages.signUpFailure, 'danger');
+      });
+  };
 
   render () {
-    const { email, password, passwordConfirmation } = this.state
+    const { email, password, passwordConfirmation } = this.state;
 
     return (
-      <form className='auth-form' onSubmit={this.onSignUp}>
+      <form className="auth-form" onSubmit={this.onSignUp}>
         <h3>Sign Up</h3>
 
         <label htmlFor="email">Email</label>
@@ -72,8 +73,8 @@ class SignUp extends Component {
         />
         <button type="submit">Sign Up</button>
       </form>
-    )
+    );
   }
 }
 
-export default withRouter(SignUp)
+export default withRouter(SignUp);

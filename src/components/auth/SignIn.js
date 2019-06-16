@@ -1,44 +1,45 @@
-import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
-import { signIn } from '../../api/AuthApi'
-import messages from '../../data/messages/AuthMessages'
+import { signIn } from '../../api/AuthApi';
+import messages from '../../data/messages/AuthMessages';
 
 class SignIn extends Component {
   constructor () {
-    super()
+    super();
 
     this.state = {
       email: '',
       password: ''
-    }
+    };
   }
 
-  handleChange = event => this.setState({
-    [event.target.name]: event.target.value
-  })
+  handleChange = event =>
+    this.setState({
+      [event.target.name]: event.target.value
+    });
 
   onSignIn = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { alert, history, setUser } = this.props
+    const { alert, history, setUser } = this.props;
 
     signIn(this.state)
       .then(res => setUser(res.data.user))
       .then(() => alert(messages.signInSuccess, 'success'))
       .then(() => history.push('/'))
       .catch(error => {
-        console.error(error)
-        this.setState({ email: '', password: '' })
-        alert(messages.signInFailure, 'danger')
-      })
-  }
+        console.error(error);
+        this.setState({ email: '', password: '' });
+        alert(messages.signInFailure, 'danger');
+      });
+  };
 
   render () {
-    const { email, password } = this.state
+    const { email, password } = this.state;
 
     return (
-      <form className='auth-form' onSubmit={this.onSignIn}>
+      <form className="auth-form" onSubmit={this.onSignIn}>
         <h3>Sign In</h3>
         <label htmlFor="email">Email</label>
         <input
@@ -60,8 +61,8 @@ class SignIn extends Component {
         />
         <button type="submit">Sign In</button>
       </form>
-    )
+    );
   }
 }
 
-export default withRouter(SignIn)
+export default withRouter(SignIn);
