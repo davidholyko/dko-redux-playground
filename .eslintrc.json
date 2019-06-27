@@ -21,6 +21,8 @@
     "semi": ["error", "always"],
     "quotes": ["error", "single"],
     "indent": ["error", 2],
-    "react/prop-types": [0]
+    "react/prop-types": [0],
+    "space-before-function-paren": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"]
   }
 }
